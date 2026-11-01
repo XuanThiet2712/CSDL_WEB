@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSDL Studio – Đại số quan hệ &amp; Phụ thuộc hàm</title>
+<meta name="description" content="Công cụ soạn bài và tự học Đại số quan hệ, Phụ thuộc hàm cho môn Cơ sở dữ liệu.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<script>try{var t=localStorage.getItem('csdl_theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/ra.css">
+<link rel="stylesheet" href="css/fd.css">
+</head>
+<body>
+<div class="app">
+<header class="app-header">
+  <div class="brand"><div class="logo" aria-hidden="true">σ</div><div><h1>CSDL Studio</h1><p>Đại số quan hệ · Phụ thuộc hàm</p></div></div>
+  <nav class="tabs" role="tablist" aria-label="Công cụ">
+    <button class="tab" role="tab" id="tab-ra" data-tab="ra" aria-controls="p-ra" aria-selected="true">Đại số quan hệ</button>
+    <button class="tab" role="tab" id="tab-fd" data-tab="fd" aria-controls="p-fd" aria-selected="false" tabindex="-1">Phụ thuộc hàm</button>
+  </nav>
+  <div class="header-actions">
+    <button id="btn-backup" type="button" title="Tải file sao lưu toàn bộ bài làm">Sao lưu</button>
+    <button id="btn-restore" type="button" title="Khôi phục từ file sao lưu">Khôi phục</button>
+    <input type="file" id="file-restore" accept="application/json" hidden>
+    <button id="btn-theme" class="icon-btn" type="button" aria-label="Đổi giao diện sáng/tối" title="Sáng/Tối">◐</button>
+  </div>
+</header>
+<main>
+<section class="panel" id="p-ra" role="tabpanel" aria-labelledby="tab-ra">
+<aside class="left-panel">
+            <div class="group-section">
+<h2>Lược đồ Lab04</h2>
+<div class="btn-grid-flex"><button type="button" class="rel" onclick="insertAtCursor('DIENVIEN')">DIENVIEN</button><button type="button" class="rel" onclick="insertAtCursor('PHIM')">PHIM</button><button type="button" class="rel" onclick="insertAtCursor('DAODIEN')">DAODIEN</button><button type="button" class="rel" onclick="insertAtCursor('THAMGIA')">THAMGIA</button><button type="button" class="rel" onclick="insertAtCursor('THUCHIEN')">THUCHIEN</button></div>
+<div class="btn-grid-flex" style="margin-top:8px"><button type="button" onclick="insertAtCursor('MaDV')">MaDV</button><button type="button" onclick="insertAtCursor('HoDV')">HoDV</button><button type="button" onclick="insertAtCursor('TenDV')">TenDV</button><button type="button" onclick="insertAtCursor('GioiTinh')">GioiTinh</button><button type="button" onclick="insertAtCursor('MaPH')">MaPH</button><button type="button" onclick="insertAtCursor('TenPH')">TenPH</button><button type="button" onclick="insertAtCursor('Nam')">Nam</button><button type="button" onclick="insertAtCursor('DoanhThu')">DoanhThu</button><button type="button" onclick="insertAtCursor('MaDD')">MaDD</button><button type="button" onclick="insertAtCursor('HoDD')">HoDD</button><button type="button" onclick="insertAtCursor('TenDD')">TenDD</button><button type="button" onclick="insertAtCursor('VaiDien')">VaiDien</button></div>
+</div>
+<div class="group-section">
+                <h2>Phép toán cơ bản</h2>
+                <div class="btn-grid">
+                    <button type="button" onclick="insertAtCursor('σ', true)">σ</button>
+                    <button type="button" onclick="insertAtCursor('π', true)">π</button>
+                    <button type="button" onclick="insertAtCursor('ρ', true)">ρ</button>
+                    <button type="button" onclick="insertAtCursor('←')">←</button>
+                    <button type="button" onclick="insertAtCursor('→')">→</button>
+                    <button type="button" onclick="insertAtCursor('⋈', true)">⋈</button>
+                    <button type="button" onclick="insertAtCursor('×')">×</button>
+                    <button type="button" onclick="insertAtCursor('∪')">∪</button>
+                    <button type="button" onclick="insertAtCursor('∩')">∩</button>
+                    <button type="button" onclick="insertAtCursor('−')">−</button>
+                    <button type="button" onclick="insertAtCursor('÷')">÷</button>
+                </div>
+            </div>
+
+            <div class="group-section">
+                <h2>Phép nối</h2>
+                <div class="btn-grid">
+                    <button type="button" onclick="insertAtCursor('⋈', true)">⋈</button>
+                    <button type="button" onclick="insertAtCursor('⟕', true)">⟕</button>
+                    <button type="button" onclick="insertAtCursor('⟖', true)">⟖</button>
+                    <button type="button" onclick="insertAtCursor('⟗', true)">⟗</button>
+                </div>
+            </div>
+
+            <div class="group-section">
+                <h2>Điều kiện logic</h2>
+                <div class="btn-grid-named">
+                    <button type="button" onclick="insertAtCursor(' ∧ ')">∧ : và</button>
+                    <button type="button" onclick="insertAtCursor(' ∨ ')">∨ : hoặc</button>
+                    <button type="button" onclick="insertAtCursor('¬')">¬ : phủ định</button>
+                    <button type="button" onclick="insertAtCursor('∀')">∀ : với mọi</button>
+                    <button type="button" onclick="insertAtCursor('∃')">∃ : tồn tại</button>
+                </div>
+                <div class="btn-grid">
+                    <button type="button" onclick="insertAtCursor(' = ')">=</button>
+                    <button type="button" onclick="insertAtCursor(' ≠ ')">≠</button>
+                    <button type="button" onclick="insertAtCursor(' &lt; ')">&lt;</button>
+                    <button type="button" onclick="insertAtCursor(' ≤ ')">≤</button>
+                    <button type="button" onclick="insertAtCursor(' &gt; ')">&gt;</button>
+                    <button type="button" onclick="insertAtCursor(' ≥ ')">≥</button>
+                    <button type="button" onclick="insertAtCursor(' ∈ ')">∈</button>
+                </div>
+            </div>
+
+            <div class="group-section">
+                <h2>Ký hiệu gom nhóm</h2>
+                <div class="btn-grid">
+                    <button type="button" onclick="insertAtCursor('γ', true)" title="Gom nhóm γ (theo đề Lab04)">γ</button>
+                    <button type="button" onclick="insertAtCursor('ℑ', true)" title="Gom nhóm kiểu ℑ">ℑ</button>
+                </div>
+            </div>
+
+            <div class="group-section">
+                <h2>Hàm thống kê</h2>
+                <div class="btn-grid-flex">
+                    <button type="button" onclick="insertAtCursor('COUNT()', false, 6)">COUNT()</button>
+                    <button type="button" onclick="insertAtCursor('SUM()', false, 4)">SUM()</button>
+                    <button type="button" onclick="insertAtCursor('AVG()', false, 4)">AVG()</button>
+                    <button type="button" onclick="insertAtCursor('MIN()', false, 4)">MIN()</button>
+                    <button type="button" onclick="insertAtCursor('MAX()', false, 4)">MAX()</button>
+                </div>
+            </div>
+
+            <div class="group-section">
+                <h2>Ký hiệu phụ</h2>
+                <div class="btn-grid-flex">
+                    <button type="button" onclick="insertAtCursor('_')">_</button>
+                    <button type="button" onclick="insertAtCursor('{}', false, 1)">{}</button>
+                    <button type="button" onclick="insertAtCursor('()', false, 1)">()</button>
+                    <button type="button" onclick="insertAtCursor(', ')">,</button>
+                    <button type="button" onclick="insertAtCursor('.')">.</button>
+                    <button type="button" onclick="insertAtCursor('; ')">;</button>
+                    <button type="button" onclick="insertAtCursor('\'01/04/2022\'')">'01/04/2022'</button>
+                </div>
+            </div>
+        </aside>
+<div class="right-panel">
+  <div class="editor-container"><div id="editor" contenteditable="true" spellcheck="false" data-placeholder="Soạn biểu thức đại số quan hệ ở đây. Gõ tắt: &lt;= ≤, -&gt; →, \sigma rồi Space; Ctrl+H tìm &amp; thay; Alt+H xem phím tắt." aria-label="Vùng soạn thảo đại số quan hệ"></div></div>
+  <div class="action-buttons">
+    <div class="font-size-control"><label for="font-size-input">Cỡ chữ</label><input type="number" id="font-size-input" min="1" max="100" value="14" oninput="changeFontSize(this.value)" onblur="validateFontSizeInput(this)"></div>
+    <button type="button" onclick="copyText()" class="primary">Copy</button>
+    <button type="button" onclick="clearText()">Clear</button>
+    <button type="button" onclick="saveText()">Save</button>
+    <button type="button" onclick="loadText()">Load</button>
+    <button type="button" onclick="downloadTxt()">TXT</button>
+    <button type="button" onclick="printPage()">Print</button>
+  </div>
+</div>
+
+</section>
+<section class="panel" id="p-fd" role="tabpanel" aria-labelledby="tab-fd" hidden>
+<aside class="left">
+<h2>Ký hiệu</h2>
+<div class="g sy" id="sym"></div>
+<h2>Luật suy diễn Armstrong</h2>
+<div class="g" id="tpl"></div>
+<h2>Máy tính (tự giải, chèn vào bài)</h2>
+<label for="pre">Nạp đề mẫu</label><select id="pre"></select>
+<div class="r2"><div><label for="u">Thuộc tính R</label><input id="u" value="ABCD"></div><div><label for="x">X</label><input id="x" value="A"></div><div><label for="y">Y</label><input id="y" value="D"></div></div>
+<label for="f">F (mỗi phụ thuộc một dòng, dạng AB -&gt; C)</label><textarea id="f" rows="4">A -> B
+B -> C
+C -> D</textarea>
+<details><summary>G, phân rã, thể hiện r</summary>
+<label for="g">G (để so sánh F ≡ G)</label><textarea id="g" rows="3"></textarea>
+<label for="d">Phân rã, ví dụ R1(A,C); R2(B,C)</label><textarea id="d" rows="2"></textarea>
+<label for="t">Thể hiện: dòng đầu là tên thuộc tính, các dòng sau là bộ</label><textarea id="t" rows="5">A B C
+1 x 10
+1 x 20
+2 y 10
+3 y 30</textarea>
+</details>
+<div class="g" style="margin-top:8px" id="calc"></div>
+<div id="res" aria-live="polite">Kết quả hiện ở đây.</div>
+<div class="g" style="margin-top:6px"><button id="ins" type="button">Chèn vào bài</button><button id="cpr" type="button">Copy kết quả</button></div>
+<h2>Phím tắt</h2>
+<p class="hint">Alt+T →, Alt+P ⁺, Alt+S ⊆, Alt+Shift+S ⊂, Alt+E ∈, Alt+Shift+E ∉, Alt+U ∪, Alt+I ∩, Alt+Q ≡, Alt+N ∅, Alt+X ⇒, Alt+Y ⇔, Alt+M ⊨, Alt+J ⋈, Alt+1…4 chỉ số ₁…₄.<br>Gõ tắt: <b>-&gt;</b> →, <b>=&gt;</b> ⇒, <b>&gt;=</b> ≥, <b>&lt;=</b> ≤, <b>!=</b> ≠, <b>^+</b> ⁺, <b>_1</b> ₁; hoặc <b>\in</b>, <b>\sub</b>, <b>\union</b>, <b>\inter</b>, <b>\eq</b>, <b>\empty</b>, <b>\ent</b>, <b>\join</b>, <b>\all</b>, <b>\ex</b> rồi nhấn Space.</p>
+</aside><div class="right">
+<div class="g"><button id="t-ed" type="button" class="on">Soạn bài</button><button id="t-learn" type="button">Học và luyện tập</button></div>
+<div id="edpane">
+<textarea id="ed" spellcheck="false" aria-label="Vùng soạn bài" placeholder="Soạn lời giải ở đây…"></textarea>
+<details><summary>Tìm &amp; Thay</summary>
+<div class="r2" style="margin-top:6px"><input id="fi" placeholder="Tìm" aria-label="Tìm"><input id="ri" placeholder="Thay bằng" aria-label="Thay bằng"></div>
+<div class="g" style="margin-top:6px"><button id="fn" type="button">Tìm tiếp</button><button id="fr" type="button">Thay</button><button id="fa" type="button">Thay tất cả</button><span id="fs2" class="hint"></span></div>
+</details>
+<div class="act">
+<div class="fs"><label for="size" style="margin:0">Cỡ chữ:</label><input id="size" type="number" min="8" max="40" value="14"></div>
+<button id="b-copy" type="button">Copy</button><button id="b-clear" type="button">Clear</button><button id="b-save" type="button">Save</button><button id="b-load" type="button">Load</button><button id="b-txt" type="button">TXT</button><button id="b-print" type="button">Print</button>
+</div>
+</div>
+<div id="learn" hidden>
+<p class="hint">Học theo thứ tự từ trên xuống. Bấm <b>Chạy ví dụ</b> để máy tính bên trái giải mẫu từng bước. Cuối trang có đề luyện tập ngẫu nhiên.</p>
+
+<details open><summary>1. Phụ thuộc hàm là gì?</summary>
+<p><b>X → Y</b> (đọc: X xác định Y) nghĩa là: <b>hai bộ bất kỳ mà giống nhau trên X thì phải giống nhau trên Y</b>. Ví dụ MaSV → HoTen: cùng mã sinh viên thì cùng họ tên.</p>
+<ul><li>Muốn <b>chứng tỏ không thoả</b>: chỉ cần chỉ ra <b>một cặp bộ</b> giống nhau trên X nhưng khác nhau trên Y.</li>
+<li>Muốn <b>chứng tỏ thoả</b> trên một thể hiện: kiểm tra mọi cặp bộ giống nhau trên X.</li>
+<li>Phụ thuộc hàm là ràng buộc của <b>lược đồ</b>, không rút ra từ vài dòng dữ liệu. Một thể hiện chỉ bác bỏ được, không chứng minh được.</li></ul>
+<p>Cách làm Câu 1: mỗi câu “mã … xác định …” viết thành một phụ thuộc. “Mỗi sinh viên có một điểm cho mỗi môn” nghĩa là <code>MaSV, MaMH → Diem</code>. Vế trái phải có cả sinh viên lẫn môn học, nên MaSV → Diem <b>không</b> suy ra được.</p>
+<div class="ex"><button type="button" data-p="Câu 5" data-f="A->B;B->A;A->C;AC->B" data-c="11">Chạy ví dụ: kiểm tra trên thể hiện (Câu 2)</button></div></details>
+
+<details><summary>2. Phụ thuộc hiển nhiên</summary>
+<p>X → Y là <b>hiển nhiên</b> khi <b>Y ⊆ X</b> (vế phải nằm trong vế trái). Nó luôn đúng, không cần dữ liệu.</p>
+<p>Câu 3: AB → A hiển nhiên (A ⊆ AB). ABC → BC hiển nhiên. A → AB <b>không</b> (B ∉ A). AB → C <b>không</b>.</p></details>
+
+<details><summary>3. Luật Armstrong và các luật suy ra</summary>
+<ul><li><b>Phản xạ:</b> nếu Y ⊆ X thì X → Y.</li>
+<li><b>Tăng trưởng:</b> nếu X → Y thì XZ → YZ.</li>
+<li><b>Bắc cầu:</b> nếu X → Y và Y → Z thì X → Z.</li>
+<li><b>Hợp:</b> X → Y và X → Z ⇒ X → YZ.</li>
+<li><b>Tách:</b> X → YZ ⇒ X → Y và X → Z.</li>
+<li><b>Giả bắc cầu:</b> X → Y và WY → Z ⇒ WX → Z.</li></ul>
+<p><b>Cách trình bày chứng minh</b> (Câu 6, 7, 13): đánh số từng dòng, mỗi dòng ghi phụ thuộc và lý do (thuộc F, hoặc luật nào áp dụng cho dòng nào).</p>
+<pre>F = { A → B, B → C, C → D }. Chứng minh A → CD:
+1. A → B   (thuộc F)
+2. B → C   (thuộc F)
+3. A → C   (Bắc cầu, 1 và 2)
+4. C → D   (thuộc F)
+5. A → D   (Bắc cầu, 3 và 4)
+6. A → CD  (Hợp, 3 và 5)</pre>
+<div class="tip">Mẹo: tính bao đóng trước để biết kết luận có đúng không, rồi mới viết chứng minh Armstrong theo đúng thứ tự máy tính thêm thuộc tính.</div>
+<div class="ex"><button type="button" data-ins="proof">Chèn mẫu chứng minh vào bài</button></div></details>
+
+<details><summary>4. Bao đóng X⁺ (kỹ năng quan trọng nhất)</summary>
+<p>X⁺ là tập <b>mọi thuộc tính</b> được X xác định theo F. Thuật toán:</p>
+<ol><li>Đặt kết quả = X.</li><li>Tìm phụ thuộc có <b>vế trái ⊆ kết quả</b> và vế phải còn thuộc tính mới, rồi thêm vế phải vào kết quả.</li><li>Lặp lại đến khi không thêm được nữa.</li></ol>
+<p>Ví dụ Câu 5, F = {AB → C, C → D, D → E}: (AB)⁺ = AB → ABC (dùng AB → C) → ABCD (dùng C → D) → ABCDE (dùng D → E). Vậy (AB)⁺ = ABCDE = R, nên AB là siêu khoá.</p>
+<div class="tip">Lỗi hay gặp: dùng phụ thuộc mà vế trái <b>chưa</b> nằm trọn trong kết quả (ví dụ dùng AB → C khi mới có A).</div>
+<div class="ex"><button type="button" data-p="Câu 5" data-c="0" data-x="AB">Chạy ví dụ: (AB)⁺</button> <button type="button" data-p="Câu 4" data-c="0" data-x="B">Chạy ví dụ: B⁺ (Câu 4)</button></div></details>
+
+<details><summary>5. Kiểm tra X → Y có suy ra từ F không</summary>
+<p>Không cần liệt kê F⁺. Chỉ cần: tính X⁺, rồi xem <b>Y ⊆ X⁺</b> hay không. Nếu có thì X → Y ∈ F⁺.</p>
+<p>Câu 8: F = {A → B, B → C}. A⁺ = ABC nên A → C đúng. C⁺ = C nên C → A sai. (AB)⁺ = ABC không chứa D nên AB → D sai.</p>
+<div class="ex"><button type="button" data-p="Câu 8" data-c="1" data-x="A" data-y="C">Chạy ví dụ: A → C ?</button> <button type="button" data-p="Câu 8" data-c="1" data-x="AB" data-y="D">Chạy ví dụ: AB → D ?</button></div></details>
+
+<details><summary>6. Siêu khoá, khoá dự tuyển và thuộc tính khoá</summary>
+<ul><li><b>Siêu khoá</b>: X⁺ = R.</li>
+<li><b>Khoá dự tuyển</b>: siêu khoá mà <b>bỏ bất kỳ thuộc tính nào</b> thì không còn là siêu khoá (tối thiểu).</li>
+<li><b>Thuộc tính khoá</b>: thuộc ít nhất một khoá dự tuyển. Các thuộc tính còn lại là không khoá.</li></ul>
+<p><b>Cách tìm tất cả khoá</b>:</p>
+<ol><li>Thuộc tính <b>không xuất hiện ở vế phải</b> thì bắt buộc có trong mọi khoá.</li>
+<li>Thuộc tính <b>chỉ xuất hiện ở vế phải</b> thì không thuộc khoá nào.</li>
+<li>Nếu tập (1) có bao đóng = R thì đó là khoá duy nhất. Nếu không, ghép thêm các thuộc tính còn lại, theo kích thước tăng dần, bỏ qua tập đã chứa một khoá.</li>
+<li><b>Chứng minh tối thiểu</b>: với mỗi khoá K, bỏ từng thuộc tính rồi chứng tỏ bao đóng ≠ R. <b>Chứng minh đầy đủ</b>: mọi tập khác hoặc chứa một khoá, hoặc có bao đóng ≠ R.</li></ol>
+<p>Câu 9 (F = {A → BC, C → D}): A⁺ = ABCD nên A là khoá. AC⁺ = ABCD nhưng bỏ C vẫn đủ nên là siêu khoá <b>không</b> tối thiểu. BC⁺ = BCD ≠ R nên không phải siêu khoá.</p>
+<div class="ex"><button type="button" data-p="Câu 20" data-c="4">Chạy ví dụ: tìm khoá (Câu 20)</button> <button type="button" data-p="Câu 9" data-c="2" data-x="AC">Chạy ví dụ: phân loại AC (Câu 9)</button> <button type="button" data-p="Câu 18" data-c="4">Chạy ví dụ: Câu 18</button></div></details>
+
+<details><summary>7. Phụ thuộc đầy đủ và riêng phần</summary>
+<p>X → A là <b>đầy đủ</b> nếu bỏ bất kỳ thuộc tính nào khỏi X thì không còn xác định A. Nếu có <b>tập con thực sự</b> của X vẫn xác định A thì là <b>riêng phần</b>.</p>
+<p>Câu 10 (F = {AB → C, A → D}): AB → C đầy đủ (A⁺ = AD, B⁺ = B đều không chứa C). AB → D riêng phần vì A → D.</p>
+<div class="ex"><button type="button" data-p="Câu 10" data-c="3" data-x="AB" data-y="C">Chạy ví dụ: AB → C</button> <button type="button" data-p="Câu 10" data-c="3" data-x="AB" data-y="D">Chạy ví dụ: AB → D</button></div></details>
+
+<details><summary>8. Dư thừa và phủ tối thiểu</summary>
+<p>Phủ tối thiểu Fmin tương đương F và thoả ba điều kiện: <b>vế phải một thuộc tính</b>; <b>không thuộc tính thừa ở vế trái</b>; <b>không phụ thuộc thừa</b>. Làm đúng thứ tự:</p>
+<ol><li><b>Tách vế phải</b>: A → BC thành A → B và A → C.</li>
+<li><b>Bỏ thuộc tính thừa ở vế trái</b>: với XA → B, nếu B ∈ X⁺ (tính theo F hiện tại) thì bỏ A.</li>
+<li><b>Bỏ phụ thuộc thừa</b>: với X → A, bỏ nó rồi tính X⁺ theo phần còn lại; nếu vẫn chứa A thì nó thừa. Bỏ <b>từng cái một</b>, tính lại sau mỗi lần.</li></ol>
+<div class="tip">Câu 25: hai phụ thuộc A → C và B → C đều thừa khi xét riêng, nhưng <b>không được xoá đồng thời</b>. Xoá A → C trước thì B → C trở nên cần thiết. Phủ tối thiểu có thể không duy nhất.</div>
+<div class="ex"><button type="button" data-p="Câu 17" data-c="5">Chạy ví dụ: phủ tối thiểu (Câu 17)</button> <button type="button" data-p="Câu 25" data-c="6">Chạy ví dụ: dư thừa (Câu 25)</button> <button type="button" data-p="Câu 22" data-c="8">Chạy ví dụ: F ≡ G (Câu 22)</button></div></details>
+
+<details><summary>9. Hai tập phụ thuộc tương đương (F ≡ G)</summary>
+<p>F ≡ G khi <b>mỗi phụ thuộc của G suy ra được từ F</b> và <b>mỗi phụ thuộc của F suy ra được từ G</b>. Kiểm tra cả hai chiều bằng bao đóng: với X → Y của G, tính X⁺ theo F rồi so với Y; sau đó làm ngược lại. Thiếu một chiều là không tương đương, và một phản ví dụ là đủ.</p>
+<div class="ex"><button type="button" data-p="Câu 14" data-c="8">Chạy ví dụ: Câu 14</button></div></details>
+
+<details><summary>10. Dạng chuẩn 1NF, 2NF, 3NF, BCNF</summary>
+<p>Xét <b>từ cao xuống thấp</b>, dừng ở dạng đầu tiên thoả. Trước hết tìm tất cả khoá và thuộc tính khoá.</p>
+<ul><li><b>BCNF</b>: mọi phụ thuộc không hiển nhiên X → A có X là siêu khoá.</li>
+<li><b>3NF</b>: với mỗi X → A không hiển nhiên, X là siêu khoá <b>hoặc</b> A là thuộc tính khoá.</li>
+<li><b>2NF</b>: không thuộc tính không khoá nào phụ thuộc vào <b>tập con thực sự</b> của một khoá.</li>
+<li><b>1NF</b>: thuộc tính nguyên tố (đề đã cho sẵn).</li></ul>
+<p>Câu 20 (F = {AB → C, C → B}): khoá AB và AC, mọi thuộc tính đều thuộc khoá. C → B có C không là siêu khoá nên <b>vi phạm BCNF</b>, nhưng B là thuộc tính khoá nên vẫn đạt <b>3NF</b>.</p>
+<div class="ex"><button type="button" data-p="Câu 20" data-c="7">Chạy ví dụ: Câu 20</button> <button type="button" data-p="Câu 19" data-c="7">Chạy ví dụ: Câu 19</button></div></details>
+
+<details><summary>11. Phân rã: mất mát thông tin, bảo toàn phụ thuộc, 3NF</summary>
+<ul><li><b>Không mất mát thông tin</b>: dùng bảng chase. Với 2 lược đồ có cách nhanh: R₁ ∩ R₂ → R₁ ∖ R₂ hoặc R₁ ∩ R₂ → R₂ ∖ R₁ (suy ra từ F) thì không mất mát.</li>
+<li><b>Bảo toàn phụ thuộc</b>: mỗi phụ thuộc của F phải “nằm gọn” trong các lược đồ con (kiểm tra bằng thuật toán lặp mở rộng Z qua từng Rᵢ).</li>
+<li><b>Phân rã 3NF</b>: (1) tìm phủ tối thiểu; (2) gộp các phụ thuộc <b>cùng vế trái</b> thành một lược đồ; (3) bỏ lược đồ nằm trong lược đồ khác; (4) nếu không lược đồ nào chứa khoá thì <b>thêm một lược đồ khoá</b>. Cách này luôn bảo toàn phụ thuộc và không mất mát.</li></ul>
+<p>Câu 27: R₁(A,C), R₂(B,C): R₁ ∩ R₂ = C và C → B nên không mất mát, nhưng AB → C không còn giữ được. Câu 29: thuộc tính H không xuất hiện trong phụ thuộc nào nên nó nằm trong mọi khoá, vì vậy lược đồ khoá được thêm vào bước (4).</p>
+<div class="ex"><button type="button" data-p="Câu 27" data-c="9">Chạy ví dụ: Câu 27</button> <button type="button" data-p="Câu 28" data-c="9">Chạy ví dụ: Câu 28 (D₁)</button> <button type="button" data-p="Câu 28 (D₂)" data-c="9">Chạy ví dụ: Câu 28 (D₂)</button> <button type="button" data-p="Câu 29" data-c="10">Chạy ví dụ: phân rã 3NF (Câu 29)</button></div></details>
+
+<details><summary>12. Cách trình bày bài nộp</summary>
+<ul><li>Luôn ghi <b>các bước</b>, không chỉ đáp số: mỗi dòng bao đóng nêu phụ thuộc đã dùng.</li>
+<li>Tìm khoá: nêu thuộc tính bắt buộc, bao đóng từng tập thử, chứng minh tối thiểu và đầy đủ.</li>
+<li>Phủ tối thiểu: ghi lại tập sau mỗi bước 1, 2, 3.</li>
+<li>Phân rã: ghi rõ lược đồ con, khoá, dạng chuẩn, rồi kiểm tra từng tính chất được yêu cầu.</li>
+<li>Dùng nút <b>Chèn vào bài</b> để đưa kết quả máy tính vào, rồi tự thêm lời giải thích bằng lời của mình.</li></ul></details>
+
+<details open><summary>Luyện tập: cho đề ngẫu nhiên</summary>
+<div class="r2"><select id="pt" aria-label="Loại bài"><option value="cl">Tính bao đóng X⁺</option><option value="key">Tìm tất cả khoá</option><option value="imp">X → Y có suy ra không?</option><option value="nf">Dạng chuẩn cao nhất</option></select><select id="pn" aria-label="Số thuộc tính"><option>4</option><option selected>5</option><option>6</option></select><button id="pnew" type="button">Cho đề</button></div>
+<p id="pq" style="font-size:18px;margin-top:8px"></p><div id="pa"></div>
+<div class="g" id="pb" style="margin-top:6px" hidden><button id="pchk" type="button">Kiểm tra</button><button id="psol" type="button">Xem lời giải</button></div>
+<p id="pm" style="font-weight:bold"></p><pre id="ps" hidden></pre></details>
+</div>
+</div>
+</section>
+</main>
+<div id="pr"></div>
+<footer class="app-footer">CSDL Studio · Lab04 Đại số quan hệ · Lab05 Phụ thuộc hàm · Ctrl+Alt+1 / Ctrl+Alt+2 chuyển công cụ</footer>
+</div>
+<script src="js/ra/editor.js"></script>
+<script src="js/ra/tools.js"></script>
+<script src="js/fd/editor.js"></script>
+<script src="js/fd/algorithms.js"></script>
+<script src="js/fd/reports.js"></script>
+<script src="js/fd/data.js"></script>
+<script src="js/fd/ui.js"></script>
+<script src="js/core/app.js"></script>
+</body>
+</html>

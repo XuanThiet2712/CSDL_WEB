@@ -1,0 +1,19 @@
+/* Công cụ Đại số quan hệ */
+#p-ra .left-panel{padding:14px 16px;overflow-y:auto}
+#p-ra .group-section{margin-bottom:18px}
+#p-ra .group-section h2{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-weight:700}
+#p-ra .btn-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:6px}
+#p-ra .btn-grid-named{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:6px}
+#p-ra .btn-grid-flex{display:flex;flex-wrap:wrap;gap:6px}
+#p-ra .btn-grid button{font:500 20px var(--doc);padding:6px 0;min-height:40px}
+#p-ra .btn-grid-named button,#p-ra .btn-grid-flex button{font-size:13px}
+#p-ra .btn-grid-flex .rel{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
+#p-ra .right-panel{display:flex;flex-direction:column;gap:12px;padding:14px;min-height:0}
+#p-ra .editor-container{flex:1;min-height:0;overflow:auto;border:1px solid var(--border);border-radius:10px;background:var(--surface);scrollbar-width:thin}
+#editor{display:inline-block;vertical-align:top;min-width:100%;width:max-content;min-height:100%;padding:22px 26px;font:14pt var(--doc);line-height:1.6;white-space:pre-wrap;outline:none;color:var(--text)}
+#editor:empty::before{content:attr(data-placeholder);color:var(--muted);font-family:var(--ui);font-size:15px}
+#editor sub{font-size:.65em;vertical-align:baseline;position:relative;top:.25em;line-height:0;display:inline;background:transparent!important}
+#p-ra .action-buttons{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+#p-ra .action-buttons>button{flex:1 1 auto;min-width:78px}
+#p-ra .font-size-control{display:flex;align-items:center;gap:8px;margin-right:6px}
+#p-ra .font-size-control input{width:72px;text-align:center}
