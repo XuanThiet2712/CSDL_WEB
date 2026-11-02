@@ -80,7 +80,7 @@ Nội dung có lời giải (nạp đề mẫu Lab05, các nút “Chạy ví d�
 
 **Cách người dùng mở VIP (20.000đ):** bấm ⭐ Mở VIP, quét mã QR, chuyển khoản đúng số tiền và **nội dung chuyển khoản** (mã đơn riêng của từng máy, dạng `CSDLxxxxxx`), gửi biên lai kèm mã đơn cho admin, nhận **mã kích hoạt** (dạng `XXXX-XXXX`) và nhập vào.
 
-**Admin:** đăng nhập ở ⭐ Mở VIP > Đăng nhập admin. Tài khoản mặc định: `admin` / `Admin@2026` — **đổi ngay** trong mục “Đổi mật khẩu admin”. Admin được mở VIP trực tiếp, và có:
+**Admin:** đăng nhập ở ⭐ Mở VIP > Đăng nhập admin. Tài khoản mặc định: ******************** — **đổi ngay** trong mục “Đổi mật khẩu admin”. Admin được mở VIP trực tiếp, và có:
 - Sinh mã kích hoạt cho từng mã đơn.
 - Cài tài khoản nhận tiền (mã ngân hàng theo vietqr.io như MB, VCB, ACB, số tài khoản, tên chủ tài khoản) hoặc tải ảnh QR ngân hàng của bạn.
 - Nút “Sao chép đoạn cấu hình” để dán vào `js/core/config.js`.
