@@ -17,3 +17,35 @@
 #p-ra .action-buttons>button{flex:1 1 auto;min-width:78px}
 #p-ra .font-size-control{display:flex;align-items:center;gap:8px;margin-right:6px}
 #p-ra .font-size-control input{width:72px;text-align:center}
+
+/* màn hình con, kết quả, dữ liệu mẫu, bài học */
+#p-ra .mini-tabs{display:flex;gap:4px;background:var(--surface2);padding:4px;border-radius:10px;width:fit-content;flex-wrap:wrap}
+#p-ra .mini-tabs button{border:0;background:transparent;color:var(--muted)}
+#p-ra .mini-tabs button.on{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+#p-ra .rview{flex:1;min-height:0;display:flex;flex-direction:column;gap:10px}
+#p-ra .rview[hidden]{display:none}
+#rv-data,#rv-learn{overflow-y:auto;padding-right:4px}
+#ra-data{min-height:220px;font:13.5px/1.5 var(--mono);resize:vertical;white-space:pre}
+.brief{background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:8px 12px;font-size:14px}
+.brief[hidden]{display:none}
+.resbox{border:1px solid var(--border);border-radius:10px;padding:8px 12px;background:var(--surface)}
+#ra-res{max-height:42%;overflow:auto;flex:0 1 auto}
+#ra-res summary{cursor:pointer;font-weight:600}
+.rsec h4,#ra-learn-out h4{font-size:14px;margin:8px 0 4px}
+.ritem{margin:8px 0 12px}.rhead code{display:block;white-space:pre-wrap;word-break:break-word;font-size:12.5px}
+.rmeta{font-size:12.5px;color:var(--muted);margin:4px 0}
+.rerr{color:var(--bad);background:var(--bad-soft);border-radius:8px;padding:6px 10px;font-size:13.5px;margin:6px 0;list-style:none}
+.tw{overflow:auto;max-width:100%}
+.tw table{border-collapse:collapse;font-size:13.5px;min-width:60%}
+.tw th,.tw td{border:1px solid var(--border);padding:4px 10px;text-align:left;white-space:nowrap}
+.tw th{background:var(--surface2);font-weight:700}.tw .empty{color:var(--muted);font-style:italic}
+.nul{color:var(--muted)}
+pre.src{white-space:pre-wrap;font:13px/1.5 var(--mono);background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;margin:6px 0}
+#rv-learn{font-size:15px;line-height:1.6}
+#rv-learn details{border:1px solid var(--border);border-radius:10px;padding:8px 12px;background:var(--surface)}
+#rv-learn summary{cursor:pointer;font-weight:600}
+#rv-learn p,#rv-learn li{margin:6px 0}#rv-learn ul,#rv-learn ol{margin:6px 0 6px 20px;padding:0}
+#rv-learn .tip{border-left:4px solid var(--accent);background:var(--accent-soft);padding:8px 12px;border-radius:0 8px 8px 0;margin:10px 0}
+#rv-learn .ex{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+#ra-de{list-style:none;margin:6px 0 0!important;display:grid;gap:4px}
+#ra-de li{font-size:14px;margin:0}

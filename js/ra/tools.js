@@ -172,6 +172,8 @@
     return extractFromNode(new DOMParser().parseFromString(html, 'text/html').body, false);
   }
 
+  root.DSQH = { prep: function (s) { return convertSubscripts(normalizeSymbols(s)); }, extract: extractFromNode, cleanPlain: cleanPlain };
+
   if (typeof document === 'undefined') {            // chạy test bằng node
     root.__dsqh = { cleanPlain: cleanPlain, cleanPaste: cleanPaste };
     if (typeof module !== 'undefined') module.exports = root.__dsqh;
@@ -215,6 +217,9 @@
     }
     function insertTemplate(sym) { insertHtml(sym + '<sub>(' + MARK + ')</sub>'); gotoMarker(); }
     function insertFn(name) { insertHtml(name + '(' + MARK + ')'); gotoMarker(); }
+
+    root.DSQH.insertHtml = insertHtml;
+    root.DSQH.insertPlain = function (s) { insertHtml(cleanPlain(s) + '\n'); };
 
     /* ---- Dán: tự chuẩn hoá ---- */
     document.addEventListener('paste', function (e) {

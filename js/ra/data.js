@@ -1,0 +1,65 @@
+/** Đại số quan hệ – dữ liệu mẫu mặc định, ví dụ có lời giải và danh sách đề Lab04 (tóm tắt) */
+window.RA_DEFAULT_DATA = [
+  '-- Dữ liệu mẫu cho Lab04 (sửa tuỳ ý). Mỗi bảng: Tên(cột, cột, …) rồi các dòng giá trị cách nhau bằng dấu phẩy.',
+  'DIENVIEN(MaDV, HoDV, TenDV, GioiTinh)',
+  'DV01, Nguyễn Văn, An, Nam', 'DV02, Trần Thị, Bình, Nữ', 'DV03, Lê Hoàng, Cường, Nam', 'DV04, Phạm Minh, Dung, Nữ', 'DV05, Võ Thanh, Em, Nữ', 'DV06, Đặng Quốc, Phúc, Nam',
+  '',
+  'PHIM(MaPH, TenPH, Nam, DoanhThu)',
+  'PH01, Biển Xanh, 1995, 120', 'PH02, Đêm Dài, 1998, 80', 'PH03, Mùa Thu, 2020, 60', 'PH04, Hành Trình, 2020, 150', 'PH05, Phố Cũ, 1995, 120', 'PH06, Lặng Im, 2021, 40', 'PH07, Ánh Sáng, 2020, 150',
+  '',
+  'DAODIEN(MaDD, HoDD, TenDD)',
+  'DD01, Hồ Văn, Khoa', 'DD02, Mai Thị, Lan', 'DD03, Bùi Quang, Minh',
+  '',
+  'THAMGIA(MaDV, MaPH, VaiDien)',
+  'DV01, PH01, Chính', 'DV01, PH02, Phụ', 'DV01, PH05, Chính', 'DV02, PH01, Phụ', 'DV02, PH02, Chính', 'DV02, PH04, Chính', 'DV02, PH05, Phụ',
+  'DV03, PH03, Chính', 'DV03, PH04, Phụ', 'DV04, PH02, Phụ', 'DV04, PH04, Phụ', 'DV05, PH04, Chính', 'DV05, PH05, Phụ',
+  '',
+  'THUCHIEN(MaPH, MaDD)',
+  'PH01, DD01', 'PH01, DD02', 'PH02, DD01', 'PH03, DD02', 'PH04, DD01', 'PH04, DD02', 'PH05, DD01', 'PH07, DD02'
+].join('\n');
+
+window.RA_EXAMPLES = {
+  e1: { t: 'Chọn σ: diễn viên nữ (Câu 1)', s: "π_{(MaDV, HoDV, TenDV)}(σ_{(GioiTinh = 'Nữ')}(DIENVIEN))" },
+  e2: { t: 'Chiếu π sau chọn σ (Câu 2)', s: "π_{(MaPH, TenPH, Nam)}(σ_{(1990 ≤ Nam ∧ Nam ≤ 1999)}(PHIM))" },
+  e3: { t: 'Kết ⋈ qua quan hệ trung gian (Câu 6)', s: "Q1 ← σ_{(MaPH = 'PH01')}(THAMGIA)\nπ_{(MaDV, HoDV, TenDV, VaiDien)}(DIENVIEN ⋈ Q1)" },
+  e4: { t: 'Giao ∩: tham gia cả hai phim (Câu 11)', s: "Q1 ← π_{(MaDV)}(σ_{(MaPH = 'PH01')}(THAMGIA))\nQ2 ← π_{(MaDV)}(σ_{(MaPH = 'PH02')}(THAMGIA))\nQ3 ← Q1 ∩ Q2\nπ_{(MaDV, HoDV, TenDV)}(DIENVIEN ⋈ Q3)" },
+  e5: { t: 'Hiệu −: chưa tham gia phim nào (Câu 12)', s: "Q1 ← π_{(MaDV)}(THAMGIA)\nQ2 ← π_{(MaDV)}(DIENVIEN) − Q1\nπ_{(MaDV, HoDV, TenDV)}(DIENVIEN ⋈ Q2)" },
+  e6: { t: 'Gom nhóm γ: đếm theo nhóm (Câu 15)', s: "Q1 ← MaPH γ (COUNT(MaDV) → SoDV)(THAMGIA)\nπ_{(MaPH, TenPH, SoDV)}(PHIM ⋈ Q1)" },
+  e7: { t: 'Chia ÷: tham gia tất cả phim (Câu 22)', s: "Q1 ← π_{(MaPH)}(σ_{(MaDD = 'DD01')}(THUCHIEN))\nQ2 ← π_{(MaDV, MaPH)}(THAMGIA)\nQ3 ← Q2 ÷ Q1\nπ_{(MaDV, HoDV, TenDV)}(DIENVIEN ⋈ Q3)" },
+  e8: { t: 'Đổi tên ρ, nối bảng với chính nó (Câu 21)', s: "Q1 ← ρ_{(Q1(MaDV1, MaPH, VaiDien1))}(THAMGIA)\nQ2 ← ρ_{(Q2(MaDV2, MaPH, VaiDien2))}(THAMGIA)\nQ3 ← π_{(MaDV1, MaDV2, MaPH)}(σ_{(MaDV1 < MaDV2)}(Q1 ⋈ Q2))\nQ4 ← MaDV1, MaDV2 γ (COUNT(MaPH) → SoPHChung)(Q3)\nKQ ← σ_{(SoPHChung ≥ 1)}(Q4)" },
+  e9: { t: 'So với trung bình theo nhóm (Câu 24)', s: "Q1 ← Nam γ (AVG(DoanhThu) → DoanhThuTB)(PHIM)\nQ2 ← PHIM ⋈ Q1\nπ_{(MaPH, TenPH, Nam, DoanhThu)}(σ_{(DoanhThu > DoanhThuTB)}(Q2))" },
+  e10: { t: 'Top 3 mức doanh thu mỗi năm (Câu 29)', s: "Q1 ← π_{(Nam, DoanhThu)}(PHIM)\nQ2 ← ρ_{(Q2(Nam, DTCao))}(Q1)\nQ3 ← σ_{(DTCao > DoanhThu)}(Q1 ⋈ Q2)\nQ4 ← Nam, DoanhThu γ (COUNT(DTCao) → SoMucCao)(Q3)\nQ5 ← π_{(Nam, DoanhThu)}(σ_{(SoMucCao ≥ 3)}(Q4))\nQ6 ← Q1 − Q5\nKQ ← π_{(Nam, MaPH, TenPH, DoanhThu)}(PHIM ⋈ Q6)" }
+};
+
+window.RA_DE = [
+  'Mã, họ, tên diễn viên giới tính “Nữ”.',
+  'Mã phim, tên phim, năm của phim sản xuất 1990 đến 1999.',
+  'Mã phim, tên phim, doanh thu của phim có doanh thu từ 100 tỉ trở lên.',
+  'Mã và tên phim sản xuất năm 2020 có doanh thu trên 50 tỉ.',
+  'Các năm sản xuất có phim (mỗi năm một lần).',
+  'Mã, họ, tên và vai diễn của diễn viên tham gia phim “PH01”.',
+  'Mã, họ, tên diễn viên, tên phim và vai diễn trong các phim sản xuất 1990 đến 1999.',
+  'Mã, họ, tên đạo diễn thực hiện phim “PH01”.',
+  'Mã, họ, tên diễn viên tham gia phim “PH01” hoặc “PH02”.',
+  'Mã phim, tên phim, năm của các phim do đạo diễn “DD01” thực hiện.',
+  'Mã, họ, tên diễn viên tham gia cả hai phim “PH01” và “PH02”.',
+  'Mã, họ, tên diễn viên chưa tham gia phim nào.',
+  'Mã và tên phim không có diễn viên nữ, kể cả phim chưa có diễn viên.',
+  'Đạo diễn không thực hiện phim nào sản xuất từ 2020 trở đi, kể cả đạo diễn chưa có phim.',
+  'Với mỗi phim có diễn viên: mã phim, tên phim, số diễn viên.',
+  'Mã, họ, tên, số phim của đạo diễn thực hiện ít nhất 3 phim.',
+  'Theo từng năm: năm, số phim, tổng doanh thu, doanh thu trung bình.',
+  'Mã, họ, tên, số phim của diễn viên tham gia ít nhất 2 phim trong thập niên 1990.',
+  'Mã và tên phim do đúng 2 đạo diễn thực hiện.',
+  'Mã, họ, tên, số phim của mọi diễn viên; chưa tham gia phim nào thì số phim bằng 0.',
+  'Cặp diễn viên đóng chung ít nhất 2 phim: MaDV1, MaDV2, số phim chung (MaDV1 < MaDV2).',
+  'Diễn viên tham gia tất cả phim do “DD01” thực hiện (giả sử DD01 có ít nhất một phim).',
+  'Đạo diễn có phim ở mọi năm xuất hiện trong PHIM.',
+  'Phim có doanh thu cao hơn trung bình các phim cùng năm: mã, tên, năm, doanh thu.',
+  'Tổng doanh thu mỗi đạo diễn; đạo diễn có tổng lớn hơn trung bình các tổng (phim 2 đạo diễn tính đủ cho mỗi người).',
+  'Phim có doanh thu cao nhất mỗi năm (kể cả đồng hạng): năm, mã, tên, doanh thu.',
+  'Diễn viên tham gia ít nhất một phim và mọi phim đều có doanh thu cao hơn trung bình toàn bộ phim.',
+  'Diễn viên đóng chung với “DV01” trong tất cả phim “DV01” tham gia (không lấy DV01).',
+  'Mỗi năm: các phim thuộc 3 mức doanh thu cao nhất khác nhau (đồng hạng lấy hết).',
+  'Cặp đạo diễn cùng thực hiện ít nhất 2 phim và tổng doanh thu phim chung từ 200 tỉ: MaDD1, MaDD2, số phim, tổng doanh thu (MaDD1 < MaDD2).'
+];

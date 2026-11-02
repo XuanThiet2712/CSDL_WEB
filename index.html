@@ -23,6 +23,7 @@
     <button id="btn-backup" type="button" title="Tải file sao lưu toàn bộ bài làm">Sao lưu</button>
     <button id="btn-restore" type="button" title="Khôi phục từ file sao lưu">Khôi phục</button>
     <input type="file" id="file-restore" accept="application/json" hidden>
+    <button id="btn-vip" class="vipbtn" type="button" title="Bài tập mẫu VIP">⭐ Mở VIP</button>
     <button id="btn-theme" class="icon-btn" type="button" aria-label="Đổi giao diện sáng/tối" title="Sáng/Tối">◐</button>
   </div>
 </header>
@@ -30,6 +31,10 @@
 <section class="panel" id="p-ra" role="tabpanel" aria-labelledby="tab-ra">
 <aside class="left-panel">
             <div class="group-section">
+<h2>Quan hệ trung gian</h2>
+<div class="btn-grid-flex"><button type="button" onclick="insertAtCursor('Q1 ← ')">Q1</button><button type="button" onclick="insertAtCursor('Q2 ← ')">Q2</button><button type="button" onclick="insertAtCursor('Q3 ← ')">Q3</button><button type="button" onclick="insertAtCursor('Q4 ← ')">Q4</button><button type="button" onclick="insertAtCursor('Q5 ← ')">Q5</button><button type="button" onclick="insertAtCursor('Q6 ← ')">Q6</button><button type="button" onclick="insertAtCursor('Q7 ← ')">Q7</button><button type="button" onclick="insertAtCursor('Q8 ← ')">Q8</button><button type="button" onclick="insertAtCursor('KQ ← ')">KQ</button></div>
+</div>
+<div class="group-section">
 <h2>Lược đồ Lab04</h2>
 <div class="btn-grid-flex"><button type="button" class="rel" onclick="insertAtCursor('DIENVIEN')">DIENVIEN</button><button type="button" class="rel" onclick="insertAtCursor('PHIM')">PHIM</button><button type="button" class="rel" onclick="insertAtCursor('DAODIEN')">DAODIEN</button><button type="button" class="rel" onclick="insertAtCursor('THAMGIA')">THAMGIA</button><button type="button" class="rel" onclick="insertAtCursor('THUCHIEN')">THUCHIEN</button></div>
 <div class="btn-grid-flex" style="margin-top:8px"><button type="button" onclick="insertAtCursor('MaDV')">MaDV</button><button type="button" onclick="insertAtCursor('HoDV')">HoDV</button><button type="button" onclick="insertAtCursor('TenDV')">TenDV</button><button type="button" onclick="insertAtCursor('GioiTinh')">GioiTinh</button><button type="button" onclick="insertAtCursor('MaPH')">MaPH</button><button type="button" onclick="insertAtCursor('TenPH')">TenPH</button><button type="button" onclick="insertAtCursor('Nam')">Nam</button><button type="button" onclick="insertAtCursor('DoanhThu')">DoanhThu</button><button type="button" onclick="insertAtCursor('MaDD')">MaDD</button><button type="button" onclick="insertAtCursor('HoDD')">HoDD</button><button type="button" onclick="insertAtCursor('TenDD')">TenDD</button><button type="button" onclick="insertAtCursor('VaiDien')">VaiDien</button></div>
@@ -114,18 +119,84 @@
             </div>
         </aside>
 <div class="right-panel">
-  <div class="editor-container"><div id="editor" contenteditable="true" spellcheck="false" data-placeholder="Soạn biểu thức đại số quan hệ ở đây. Gõ tắt: &lt;= ≤, -&gt; →, \sigma rồi Space; Ctrl+H tìm &amp; thay; Alt+H xem phím tắt." aria-label="Vùng soạn thảo đại số quan hệ"></div></div>
-  <div class="action-buttons">
-    <div class="font-size-control"><label for="font-size-input">Cỡ chữ</label><input type="number" id="font-size-input" min="1" max="100" value="14" oninput="changeFontSize(this.value)" onblur="validateFontSizeInput(this)"></div>
-    <button type="button" onclick="copyText()" class="primary">Copy</button>
-    <button type="button" onclick="clearText()">Clear</button>
-    <button type="button" onclick="saveText()">Save</button>
-    <button type="button" onclick="loadText()">Load</button>
-    <button type="button" onclick="downloadTxt()">TXT</button>
-    <button type="button" onclick="printPage()">Print</button>
+  <div class="mini-tabs" role="tablist" aria-label="Màn hình"><button type="button" data-rv="edit" class="on">Soạn bài</button><button type="button" data-rv="data">Dữ liệu mẫu</button><button type="button" data-rv="learn">Học và đề bài</button></div>
+  <div class="rview" id="rv-edit">
+    <div id="ra-brief" class="brief" hidden></div>
+    <div class="editor-container"><div id="editor" contenteditable="true" spellcheck="false" data-placeholder="Soạn biểu thức đại số quan hệ ở đây. Ctrl+Enter chạy câu này · Gõ tắt: &lt;= ≤, -&gt; →, \sigma rồi Space · Ctrl+H tìm &amp; thay · Alt+H phím tắt." aria-label="Vùng soạn thảo đại số quan hệ"></div></div>
+    <details id="ra-res" class="resbox"><summary>Kết quả chạy: <span id="ra-res-title">chưa chạy</span> <span id="ra-res-info" class="hint"></span></summary><div id="ra-out"><p class="hint">Bấm ▶ Chạy câu này (Ctrl+Enter) để chạy biểu thức trên dữ liệu ở tab “Dữ liệu mẫu”.</p></div></details>
+    <div class="action-buttons">
+      <button type="button" class="primary" onclick="RA.run('cau')" title="Ctrl+Enter">▶ Chạy câu này</button>
+      <button type="button" onclick="RA.run('all')" title="Ctrl+Shift+Enter">▶ Chạy tất cả</button>
+      <div class="font-size-control"><label for="font-size-input">Cỡ chữ</label><input type="number" id="font-size-input" min="1" max="100" value="14" oninput="changeFontSize(this.value)" onblur="validateFontSizeInput(this)"></div>
+      <button type="button" onclick="copyText()">Copy</button>
+      <button type="button" onclick="clearText()">Clear</button>
+      <button type="button" onclick="saveText()">Save</button>
+      <button type="button" onclick="loadText()">Load</button>
+      <button type="button" onclick="downloadTxt()">TXT</button>
+      <button type="button" onclick="printPage()">Print</button>
+    </div>
+  </div>
+  <div class="rview" id="rv-data" hidden>
+    <p class="hint">Nhập bảng theo dạng <code>Tên(cột1, cột2, …)</code>, các dòng sau là giá trị cách nhau bằng dấu phẩy (hoặc Tab); cách một dòng trống giữa các bảng. Số tự nhận là số. Công cụ dùng dữ liệu này khi bấm ▶ Chạy.</p>
+    <textarea id="ra-data" spellcheck="false" aria-label="Dữ liệu bảng mẫu"></textarea>
+    <div class="g" style="display:flex;gap:8px"><button type="button" id="ra-data-reset">Đặt lại dữ liệu mẫu Lab04</button></div>
+    <div id="ra-data-status"></div><div id="ra-data-preview"></div>
+  </div>
+  <div class="rview" id="rv-learn" hidden>
+    <div class="lock-bar"><span>🔒 Bài tập mẫu và ví dụ có lời giải là nội dung <b>VIP</b>.</span><button type="button" class="vip-open primary">Mở VIP 20k</button></div>
+    <div id="ra-learn-out" class="resbox" hidden></div>
+    
+<details open><summary>Cách làm một bài đại số quan hệ</summary>
+<ol><li><b>Đọc đề</b>: xác định cần cột nào (kết quả) và điều kiện nào.</li><li><b>Chọn bảng</b>: cần thông tin ở bảng nào, nối với nhau qua thuộc tính nào (khoá ngoại).</li><li><b>Viết từng bước</b> bằng quan hệ trung gian Q1, Q2, … (phép gán ←), mỗi bước làm một việc.</li><li><b>Chạy thử</b> trên dữ liệu mẫu (Ctrl+Enter) rồi tự đếm tay xem kết quả có hợp lý không.</li></ol>
+<div class="tip">Kết quả là <b>tập hợp</b>: không có dòng trùng. Phép chiếu π tự loại các dòng trùng.</div></details>
+
+<details><summary>1. Chọn σ và chiếu π</summary>
+<p><b>σ_{(điều kiện)}(R)</b> giữ các bộ thoả điều kiện; <b>π_{(thuộc tính)}(R)</b> giữ các cột được chọn. Thường viết σ trước (bên trong), π sau (bên ngoài).</p>
+<ul><li>So sánh: = ≠ &lt; &gt; ≤ ≥; kết hợp bằng ∧ (và), ∨ (hoặc), ¬ (không). Chuỗi đặt trong nháy đơn: 'Nữ'.</li><li>“từ 100 trở lên” là ≥ 100; “trên 50” là &gt; 50; “từ 1990 đến 1999” là 1990 ≤ Nam ∧ Nam ≤ 1999.</li></ul>
+<div class="ex sample-only"><button type="button" data-raex="e1" data-act="run">Chạy thử trên dữ liệu mẫu</button><button type="button" data-raex="e1" data-act="ins">Chèn vào bài</button></div><div class="ex sample-only"><button type="button" data-raex="e2" data-act="run">Chạy thử trên dữ liệu mẫu</button><button type="button" data-raex="e2" data-act="ins">Chèn vào bài</button></div></details>
+
+<details><summary>2. Kết ⋈ và tích ×</summary>
+<p><b>Kết tự nhiên R ⋈ S</b> nối các bộ có giá trị bằng nhau ở mọi thuộc tính cùng tên. <b>Kết theta R ⋈_{(R.a = S.b)} S</b> nối theo điều kiện tự viết. Khi hai bảng có cột cùng tên và bạn viết kết theta, phải ghi rõ <b>tên bảng.thuộc tính</b> (DIENVIEN.MaDV), nếu không công cụ báo “bị mơ hồ”.</p>
+<p>Mẹo: lọc trước bằng σ ra một quan hệ nhỏ Q1 rồi mới ⋈ với bảng chính để lấy họ tên, tên phim…</p>
+<div class="ex sample-only"><button type="button" data-raex="e3" data-act="run">Chạy thử trên dữ liệu mẫu</button><button type="button" data-raex="e3" data-act="ins">Chèn vào bài</button></div></details>
+
+<details><summary>3. Hợp ∪, giao ∩, hiệu −</summary>
+<p>Hai quan hệ phải có cùng thuộc tính. Cách chọn phép: “<b>hoặc</b>” dùng ∪ (hoặc điều kiện ∨ nếu cùng bảng); “<b>cả hai / đồng thời</b>” dùng ∩; “<b>chưa / không</b>” dùng hiệu −.</p>
+<div class="ex sample-only"><button type="button" data-raex="e4" data-act="run">Chạy thử trên dữ liệu mẫu</button><button type="button" data-raex="e4" data-act="ins">Chèn vào bài</button></div></details>
+
+<details><summary>4. Mẫu “không có / chưa từng” (hiệu −)</summary>
+<ol><li>Lấy tập khoá của những đối tượng <b>có</b> điều kiện (Q1).</li><li>Lấy tập khoá của <b>tất cả</b> đối tượng rồi trừ Q1 (Q2 ← π(R) − Q1).</li><li>Nối Q2 với bảng gốc để lấy đủ thông tin (họ, tên…).</li></ol>
+<p>Áp dụng cho “diễn viên chưa tham gia phim nào”, “phim không có diễn viên nữ”, “đạo diễn không làm phim từ 2020”.</p>
+<div class="ex sample-only"><button type="button" data-raex="e5" data-act="run">Chạy thử trên dữ liệu mẫu</button><button type="button" data-raex="e5" data-act="ins">Chèn vào bài</button></div></details>
+
+<details><summary>5. Đổi tên ρ (nối bảng với chính nó)</summary>
+<p><b>ρ_{(TênMới(a₁, a₂, …))}(R)</b> đặt tên quan hệ và tên cột mới. Cần khi so sánh hai dòng của cùng một bảng, ví dụ tìm cặp diễn viên đóng chung phim: tạo hai bản sao Q1, Q2 của THAMGIA với cột MaDV1, MaDV2; nối theo MaPH; giữ MaDV1 &lt; MaDV2 để không lặp cặp.</p>
+<div class="ex sample-only"><button type="button" data-raex="e8" data-act="run">Chạy thử trên dữ liệu mẫu</button><button type="button" data-raex="e8" data-act="ins">Chèn vào bài</button></div></details>
+
+<details><summary>6. Chia ÷ (“tất cả”)</summary>
+<p>R(X, Y) ÷ S(Y) cho các giá trị X ghép được với <b>mọi</b> Y của S. Chuẩn bị: R chỉ gồm 2 cột (đối tượng, thứ phải đủ), S chỉ gồm cột “thứ phải đủ”. Ví dụ “diễn viên tham gia tất cả phim của DD01”: R = π(MaDV, MaPH)(THAMGIA), S = π(MaPH)(σ(MaDD = 'DD01')(THUCHIEN)).</p>
+<div class="ex sample-only"><button type="button" data-raex="e7" data-act="run">Chạy thử trên dữ liệu mẫu</button><button type="button" data-raex="e7" data-act="ins">Chèn vào bài</button></div></details>
+
+<details><summary>7. Gom nhóm γ và hàm thống kê</summary>
+<p><b>MaPH γ (COUNT(MaDV) → SoDV)(THAMGIA)</b>: gom theo MaPH, đếm số MaDV, đặt tên cột kết quả là SoDV. Các hàm: COUNT, SUM, AVG, MIN, MAX. Không có thuộc tính gom (γ (AVG(DoanhThu) → TB)(PHIM)) thì tính trên cả bảng.</p>
+<ul><li>“ít nhất 3 phim” là γ đếm rồi σ_{(SoPhim ≥ 3)}.</li><li>Cẩn thận <b>đếm trùng</b>: khi tính tổng sau một phép nối, hãy chiếu giữ cả khoá (MaDD, MaPH, DoanhThu) để hai phim cùng doanh thu không bị gộp mất.</li><li>Đề dùng ký hiệu γ; công cụ cũng nhận ℑ.</li></ul>
+<div class="ex sample-only"><button type="button" data-raex="e6" data-act="run">Chạy thử trên dữ liệu mẫu</button><button type="button" data-raex="e6" data-act="ins">Chèn vào bài</button></div></details>
+
+<details><summary>8. Mẫu “lớn nhất” và “cao hơn trung bình”</summary>
+<ol><li>Gom nhóm tính MAX hoặc AVG theo nhóm (Q1).</li><li>Nối Q1 với bảng gốc theo nhóm (Q2 ← R ⋈ Q1).</li><li>Chọn σ so sánh cột giá trị với cột vừa tính.</li></ol>
+<p>Đề khó hơn như “3 mức doanh thu cao nhất mỗi năm” đếm xem mỗi mức có bao nhiêu mức cao hơn nó trong cùng năm, loại những mức có từ 3 mức cao hơn.</p>
+<div class="ex sample-only"><button type="button" data-raex="e9" data-act="run">Chạy thử trên dữ liệu mẫu</button><button type="button" data-raex="e9" data-act="ins">Chèn vào bài</button></div><div class="ex sample-only"><button type="button" data-raex="e10" data-act="run">Chạy thử trên dữ liệu mẫu</button><button type="button" data-raex="e10" data-act="ins">Chèn vào bài</button></div></details>
+
+<details><summary>9. Phép gán ← và quan hệ trung gian</summary>
+<p>Viết <b>Q1 ← biểu thức</b> để đặt tên cho kết quả; từ dòng sau dùng Q1 như một bảng. Đề yêu cầu ghi rõ biểu thức tạo quan hệ trước khi dùng, nên đặt tên liên tục Q1, Q2, … và đừng dùng tên chưa định nghĩa (lỗi hay gặp khi đổi tên giữa chừng).</p></details>
+
+<details><summary>10. Dùng công cụ để kiểm tra bài</summary>
+<ul><li>Tab <b>Dữ liệu mẫu</b>: sửa bảng cho có đủ trường hợp (diễn viên chưa đóng phim, phim chưa có diễn viên, hai phim đồng hạng).</li><li>Viết bài, đặt con trỏ trong câu rồi bấm <b>Ctrl+Enter</b> (▶ Chạy câu này) hoặc Ctrl+Shift+Enter (cả bài).</li><li>Lỗi thường gặp và cách công cụ báo: thiếu ngoặc; quan hệ chưa định nghĩa; thuộc tính bị mơ hồ sau phép nối; thiếu “(” sau γ.</li></ul></details>
+<h3 style="margin-top:14px">Đề Lab04 (tóm tắt, bấm để chèn “Câu n” vào bài)</h3>
+<ul id="ra-de"></ul>
+
   </div>
 </div>
-
 </section>
 <section class="panel" id="p-fd" role="tabpanel" aria-labelledby="tab-fd" hidden>
 <aside class="left">
@@ -134,7 +205,7 @@
 <h2>Luật suy diễn Armstrong</h2>
 <div class="g" id="tpl"></div>
 <h2>Máy tính (tự giải, chèn vào bài)</h2>
-<label for="pre">Nạp đề mẫu</label><select id="pre"></select>
+<div class="lock-bar"><span>🔒 Bài tập mẫu và ví dụ có lời giải là nội dung <b>VIP</b>.</span><button type="button" class="vip-open primary">Mở VIP 20k</button></div><div class="sample-only"><label for="pre">Nạp đề mẫu (VIP)</label><select id="pre"></select></div>
 <div class="r2"><div><label for="u">Thuộc tính R</label><input id="u" value="ABCD"></div><div><label for="x">X</label><input id="x" value="A"></div><div><label for="y">Y</label><input id="y" value="D"></div></div>
 <label for="f">F (mỗi phụ thuộc một dòng, dạng AB -&gt; C)</label><textarea id="f" rows="4">A -> B
 B -> C
@@ -167,6 +238,7 @@ C -> D</textarea>
 </div>
 </div>
 <div id="learn" hidden>
+<div class="lock-bar"><span>🔒 Bài tập mẫu và ví dụ có lời giải là nội dung <b>VIP</b>.</span><button type="button" class="vip-open primary">Mở VIP 20k</button></div>
 <p class="hint">Học theo thứ tự từ trên xuống. Bấm <b>Chạy ví dụ</b> để máy tính bên trái giải mẫu từng bước. Cuối trang có đề luyện tập ngẫu nhiên.</p>
 
 <details open><summary>1. Phụ thuộc hàm là gì?</summary>
@@ -175,7 +247,7 @@ C -> D</textarea>
 <li>Muốn <b>chứng tỏ thoả</b> trên một thể hiện: kiểm tra mọi cặp bộ giống nhau trên X.</li>
 <li>Phụ thuộc hàm là ràng buộc của <b>lược đồ</b>, không rút ra từ vài dòng dữ liệu. Một thể hiện chỉ bác bỏ được, không chứng minh được.</li></ul>
 <p>Cách làm Câu 1: mỗi câu “mã … xác định …” viết thành một phụ thuộc. “Mỗi sinh viên có một điểm cho mỗi môn” nghĩa là <code>MaSV, MaMH → Diem</code>. Vế trái phải có cả sinh viên lẫn môn học, nên MaSV → Diem <b>không</b> suy ra được.</p>
-<div class="ex"><button type="button" data-p="Câu 5" data-f="A->B;B->A;A->C;AC->B" data-c="11">Chạy ví dụ: kiểm tra trên thể hiện (Câu 2)</button></div></details>
+<div class="ex sample-only"><button type="button" data-p="Câu 5" data-f="A->B;B->A;A->C;AC->B" data-c="11">Chạy ví dụ: kiểm tra trên thể hiện (Câu 2)</button></div></details>
 
 <details><summary>2. Phụ thuộc hiển nhiên</summary>
 <p>X → Y là <b>hiển nhiên</b> khi <b>Y ⊆ X</b> (vế phải nằm trong vế trái). Nó luôn đúng, không cần dữ liệu.</p>
@@ -197,19 +269,19 @@ C -> D</textarea>
 5. A → D   (Bắc cầu, 3 và 4)
 6. A → CD  (Hợp, 3 và 5)</pre>
 <div class="tip">Mẹo: tính bao đóng trước để biết kết luận có đúng không, rồi mới viết chứng minh Armstrong theo đúng thứ tự máy tính thêm thuộc tính.</div>
-<div class="ex"><button type="button" data-ins="proof">Chèn mẫu chứng minh vào bài</button></div></details>
+<div class="ex sample-only"><button type="button" data-ins="proof">Chèn mẫu chứng minh vào bài</button></div></details>
 
 <details><summary>4. Bao đóng X⁺ (kỹ năng quan trọng nhất)</summary>
 <p>X⁺ là tập <b>mọi thuộc tính</b> được X xác định theo F. Thuật toán:</p>
 <ol><li>Đặt kết quả = X.</li><li>Tìm phụ thuộc có <b>vế trái ⊆ kết quả</b> và vế phải còn thuộc tính mới, rồi thêm vế phải vào kết quả.</li><li>Lặp lại đến khi không thêm được nữa.</li></ol>
 <p>Ví dụ Câu 5, F = {AB → C, C → D, D → E}: (AB)⁺ = AB → ABC (dùng AB → C) → ABCD (dùng C → D) → ABCDE (dùng D → E). Vậy (AB)⁺ = ABCDE = R, nên AB là siêu khoá.</p>
 <div class="tip">Lỗi hay gặp: dùng phụ thuộc mà vế trái <b>chưa</b> nằm trọn trong kết quả (ví dụ dùng AB → C khi mới có A).</div>
-<div class="ex"><button type="button" data-p="Câu 5" data-c="0" data-x="AB">Chạy ví dụ: (AB)⁺</button> <button type="button" data-p="Câu 4" data-c="0" data-x="B">Chạy ví dụ: B⁺ (Câu 4)</button></div></details>
+<div class="ex sample-only"><button type="button" data-p="Câu 5" data-c="0" data-x="AB">Chạy ví dụ: (AB)⁺</button> <button type="button" data-p="Câu 4" data-c="0" data-x="B">Chạy ví dụ: B⁺ (Câu 4)</button></div></details>
 
 <details><summary>5. Kiểm tra X → Y có suy ra từ F không</summary>
 <p>Không cần liệt kê F⁺. Chỉ cần: tính X⁺, rồi xem <b>Y ⊆ X⁺</b> hay không. Nếu có thì X → Y ∈ F⁺.</p>
 <p>Câu 8: F = {A → B, B → C}. A⁺ = ABC nên A → C đúng. C⁺ = C nên C → A sai. (AB)⁺ = ABC không chứa D nên AB → D sai.</p>
-<div class="ex"><button type="button" data-p="Câu 8" data-c="1" data-x="A" data-y="C">Chạy ví dụ: A → C ?</button> <button type="button" data-p="Câu 8" data-c="1" data-x="AB" data-y="D">Chạy ví dụ: AB → D ?</button></div></details>
+<div class="ex sample-only"><button type="button" data-p="Câu 8" data-c="1" data-x="A" data-y="C">Chạy ví dụ: A → C ?</button> <button type="button" data-p="Câu 8" data-c="1" data-x="AB" data-y="D">Chạy ví dụ: AB → D ?</button></div></details>
 
 <details><summary>6. Siêu khoá, khoá dự tuyển và thuộc tính khoá</summary>
 <ul><li><b>Siêu khoá</b>: X⁺ = R.</li>
@@ -221,12 +293,12 @@ C -> D</textarea>
 <li>Nếu tập (1) có bao đóng = R thì đó là khoá duy nhất. Nếu không, ghép thêm các thuộc tính còn lại, theo kích thước tăng dần, bỏ qua tập đã chứa một khoá.</li>
 <li><b>Chứng minh tối thiểu</b>: với mỗi khoá K, bỏ từng thuộc tính rồi chứng tỏ bao đóng ≠ R. <b>Chứng minh đầy đủ</b>: mọi tập khác hoặc chứa một khoá, hoặc có bao đóng ≠ R.</li></ol>
 <p>Câu 9 (F = {A → BC, C → D}): A⁺ = ABCD nên A là khoá. AC⁺ = ABCD nhưng bỏ C vẫn đủ nên là siêu khoá <b>không</b> tối thiểu. BC⁺ = BCD ≠ R nên không phải siêu khoá.</p>
-<div class="ex"><button type="button" data-p="Câu 20" data-c="4">Chạy ví dụ: tìm khoá (Câu 20)</button> <button type="button" data-p="Câu 9" data-c="2" data-x="AC">Chạy ví dụ: phân loại AC (Câu 9)</button> <button type="button" data-p="Câu 18" data-c="4">Chạy ví dụ: Câu 18</button></div></details>
+<div class="ex sample-only"><button type="button" data-p="Câu 20" data-c="4">Chạy ví dụ: tìm khoá (Câu 20)</button> <button type="button" data-p="Câu 9" data-c="2" data-x="AC">Chạy ví dụ: phân loại AC (Câu 9)</button> <button type="button" data-p="Câu 18" data-c="4">Chạy ví dụ: Câu 18</button></div></details>
 
 <details><summary>7. Phụ thuộc đầy đủ và riêng phần</summary>
 <p>X → A là <b>đầy đủ</b> nếu bỏ bất kỳ thuộc tính nào khỏi X thì không còn xác định A. Nếu có <b>tập con thực sự</b> của X vẫn xác định A thì là <b>riêng phần</b>.</p>
 <p>Câu 10 (F = {AB → C, A → D}): AB → C đầy đủ (A⁺ = AD, B⁺ = B đều không chứa C). AB → D riêng phần vì A → D.</p>
-<div class="ex"><button type="button" data-p="Câu 10" data-c="3" data-x="AB" data-y="C">Chạy ví dụ: AB → C</button> <button type="button" data-p="Câu 10" data-c="3" data-x="AB" data-y="D">Chạy ví dụ: AB → D</button></div></details>
+<div class="ex sample-only"><button type="button" data-p="Câu 10" data-c="3" data-x="AB" data-y="C">Chạy ví dụ: AB → C</button> <button type="button" data-p="Câu 10" data-c="3" data-x="AB" data-y="D">Chạy ví dụ: AB → D</button></div></details>
 
 <details><summary>8. Dư thừa và phủ tối thiểu</summary>
 <p>Phủ tối thiểu Fmin tương đương F và thoả ba điều kiện: <b>vế phải một thuộc tính</b>; <b>không thuộc tính thừa ở vế trái</b>; <b>không phụ thuộc thừa</b>. Làm đúng thứ tự:</p>
@@ -234,11 +306,11 @@ C -> D</textarea>
 <li><b>Bỏ thuộc tính thừa ở vế trái</b>: với XA → B, nếu B ∈ X⁺ (tính theo F hiện tại) thì bỏ A.</li>
 <li><b>Bỏ phụ thuộc thừa</b>: với X → A, bỏ nó rồi tính X⁺ theo phần còn lại; nếu vẫn chứa A thì nó thừa. Bỏ <b>từng cái một</b>, tính lại sau mỗi lần.</li></ol>
 <div class="tip">Câu 25: hai phụ thuộc A → C và B → C đều thừa khi xét riêng, nhưng <b>không được xoá đồng thời</b>. Xoá A → C trước thì B → C trở nên cần thiết. Phủ tối thiểu có thể không duy nhất.</div>
-<div class="ex"><button type="button" data-p="Câu 17" data-c="5">Chạy ví dụ: phủ tối thiểu (Câu 17)</button> <button type="button" data-p="Câu 25" data-c="6">Chạy ví dụ: dư thừa (Câu 25)</button> <button type="button" data-p="Câu 22" data-c="8">Chạy ví dụ: F ≡ G (Câu 22)</button></div></details>
+<div class="ex sample-only"><button type="button" data-p="Câu 17" data-c="5">Chạy ví dụ: phủ tối thiểu (Câu 17)</button> <button type="button" data-p="Câu 25" data-c="6">Chạy ví dụ: dư thừa (Câu 25)</button> <button type="button" data-p="Câu 22" data-c="8">Chạy ví dụ: F ≡ G (Câu 22)</button></div></details>
 
 <details><summary>9. Hai tập phụ thuộc tương đương (F ≡ G)</summary>
 <p>F ≡ G khi <b>mỗi phụ thuộc của G suy ra được từ F</b> và <b>mỗi phụ thuộc của F suy ra được từ G</b>. Kiểm tra cả hai chiều bằng bao đóng: với X → Y của G, tính X⁺ theo F rồi so với Y; sau đó làm ngược lại. Thiếu một chiều là không tương đương, và một phản ví dụ là đủ.</p>
-<div class="ex"><button type="button" data-p="Câu 14" data-c="8">Chạy ví dụ: Câu 14</button></div></details>
+<div class="ex sample-only"><button type="button" data-p="Câu 14" data-c="8">Chạy ví dụ: Câu 14</button></div></details>
 
 <details><summary>10. Dạng chuẩn 1NF, 2NF, 3NF, BCNF</summary>
 <p>Xét <b>từ cao xuống thấp</b>, dừng ở dạng đầu tiên thoả. Trước hết tìm tất cả khoá và thuộc tính khoá.</p>
@@ -247,14 +319,14 @@ C -> D</textarea>
 <li><b>2NF</b>: không thuộc tính không khoá nào phụ thuộc vào <b>tập con thực sự</b> của một khoá.</li>
 <li><b>1NF</b>: thuộc tính nguyên tố (đề đã cho sẵn).</li></ul>
 <p>Câu 20 (F = {AB → C, C → B}): khoá AB và AC, mọi thuộc tính đều thuộc khoá. C → B có C không là siêu khoá nên <b>vi phạm BCNF</b>, nhưng B là thuộc tính khoá nên vẫn đạt <b>3NF</b>.</p>
-<div class="ex"><button type="button" data-p="Câu 20" data-c="7">Chạy ví dụ: Câu 20</button> <button type="button" data-p="Câu 19" data-c="7">Chạy ví dụ: Câu 19</button></div></details>
+<div class="ex sample-only"><button type="button" data-p="Câu 20" data-c="7">Chạy ví dụ: Câu 20</button> <button type="button" data-p="Câu 19" data-c="7">Chạy ví dụ: Câu 19</button></div></details>
 
 <details><summary>11. Phân rã: mất mát thông tin, bảo toàn phụ thuộc, 3NF</summary>
 <ul><li><b>Không mất mát thông tin</b>: dùng bảng chase. Với 2 lược đồ có cách nhanh: R₁ ∩ R₂ → R₁ ∖ R₂ hoặc R₁ ∩ R₂ → R₂ ∖ R₁ (suy ra từ F) thì không mất mát.</li>
 <li><b>Bảo toàn phụ thuộc</b>: mỗi phụ thuộc của F phải “nằm gọn” trong các lược đồ con (kiểm tra bằng thuật toán lặp mở rộng Z qua từng Rᵢ).</li>
 <li><b>Phân rã 3NF</b>: (1) tìm phủ tối thiểu; (2) gộp các phụ thuộc <b>cùng vế trái</b> thành một lược đồ; (3) bỏ lược đồ nằm trong lược đồ khác; (4) nếu không lược đồ nào chứa khoá thì <b>thêm một lược đồ khoá</b>. Cách này luôn bảo toàn phụ thuộc và không mất mát.</li></ul>
 <p>Câu 27: R₁(A,C), R₂(B,C): R₁ ∩ R₂ = C và C → B nên không mất mát, nhưng AB → C không còn giữ được. Câu 29: thuộc tính H không xuất hiện trong phụ thuộc nào nên nó nằm trong mọi khoá, vì vậy lược đồ khoá được thêm vào bước (4).</p>
-<div class="ex"><button type="button" data-p="Câu 27" data-c="9">Chạy ví dụ: Câu 27</button> <button type="button" data-p="Câu 28" data-c="9">Chạy ví dụ: Câu 28 (D₁)</button> <button type="button" data-p="Câu 28 (D₂)" data-c="9">Chạy ví dụ: Câu 28 (D₂)</button> <button type="button" data-p="Câu 29" data-c="10">Chạy ví dụ: phân rã 3NF (Câu 29)</button></div></details>
+<div class="ex sample-only"><button type="button" data-p="Câu 27" data-c="9">Chạy ví dụ: Câu 27</button> <button type="button" data-p="Câu 28" data-c="9">Chạy ví dụ: Câu 28 (D₁)</button> <button type="button" data-p="Câu 28 (D₂)" data-c="9">Chạy ví dụ: Câu 28 (D₂)</button> <button type="button" data-p="Câu 29" data-c="10">Chạy ví dụ: phân rã 3NF (Câu 29)</button></div></details>
 
 <details><summary>12. Cách trình bày bài nộp</summary>
 <ul><li>Luôn ghi <b>các bước</b>, không chỉ đáp số: mỗi dòng bao đóng nêu phụ thuộc đã dùng.</li>
@@ -272,16 +344,66 @@ C -> D</textarea>
 </div>
 </section>
 </main>
+<dialog id="dlg-vip" aria-labelledby="vip-title">
+  <div class="dlg-head"><h2 id="vip-title">Mở VIP: bài tập mẫu</h2><button type="button" id="vip-close" class="icon-btn" aria-label="Đóng">×</button></div>
+  <div id="vip-buy" class="vip-view">
+    <p>Mở toàn bộ <b>bài tập mẫu và ví dụ có lời giải</b> (Đại số quan hệ và Phụ thuộc hàm) với <b id="vip-price">20.000đ</b>, trả một lần.</p>
+    <div class="vip-pay"><div id="vip-qr" class="vip-qr"></div><div id="vip-info" class="vip-info"></div></div>
+    <ol class="vip-steps"><li>Quét mã QR bằng app ngân hàng, giữ nguyên số tiền và <b>nội dung chuyển khoản</b>.</li><li>Gửi biên lai kèm mã đơn (nội dung chuyển khoản) cho admin để nhận <b>mã kích hoạt</b>.</li><li>Nhập mã kích hoạt vào ô bên dưới.</li></ol>
+    <label for="vip-code">Mã kích hoạt</label>
+    <div class="row"><input id="vip-code" placeholder="XXXX-XXXX" autocomplete="off" spellcheck="false"><button id="vip-activate" class="primary" type="button">Kích hoạt</button></div>
+    <p id="vip-err" class="err" role="alert"></p>
+    <button type="button" id="vip-to-admin" class="link">Đăng nhập admin</button>
+  </div>
+  <div id="vip-login" class="vip-view" hidden>
+    <label for="ad-user">Tài khoản</label><input id="ad-user" value="admin" autocomplete="username">
+    <label for="ad-pass">Mật khẩu</label><input id="ad-pass" type="password" autocomplete="current-password">
+    <label class="chk"><input type="checkbox" id="ad-remember"> Ghi nhớ trên máy này</label>
+    <p id="vip-login-err" class="err" role="alert"></p>
+    <div class="row"><button type="button" id="vip-back">Quay lại</button><button type="button" id="vip-login-go" class="primary">Đăng nhập</button></div>
+  </div>
+  <div id="vip-admin" class="vip-view" hidden>
+    <p class="hint">Bạn đang dùng tài khoản admin: toàn bộ bài tập mẫu đã mở.</p>
+    <fieldset><legend>Sinh mã kích hoạt</legend>
+      <label for="ad-order">Mã đơn của người mua (nội dung chuyển khoản)</label>
+      <div class="row"><input id="ad-order" placeholder="CSDLAB12CD" autocomplete="off"><button type="button" id="ad-gen" class="primary">Tạo mã</button></div>
+      <p id="ad-out" style="margin-top:8px"></p>
+    </fieldset>
+    <fieldset><legend>Tài khoản nhận tiền và mã QR</legend>
+      <div class="row"><div style="flex:1"><label for="ad-bank">Mã ngân hàng (MB, VCB, ACB…)</label><input id="ad-bank"></div><div style="flex:1"><label for="ad-price">Số tiền</label><input id="ad-price" type="number"></div></div>
+      <label for="ad-acc">Số tài khoản</label><input id="ad-acc" inputmode="numeric">
+      <label for="ad-name">Tên chủ tài khoản (không dấu)</label><input id="ad-name">
+      <label for="ad-qr">Hoặc tải ảnh QR ngân hàng của bạn</label><input id="ad-qr" type="file" accept="image/*">
+      <div class="row" style="margin-top:8px;flex-wrap:wrap"><button type="button" id="ad-save" class="primary">Lưu</button><button type="button" id="ad-qr-clear">Bỏ ảnh QR</button><button type="button" id="ad-snippet">Sao chép đoạn cấu hình</button></div>
+    </fieldset>
+    <fieldset><legend>Đổi mật khẩu admin</legend>
+      <div class="row"><input id="ad-new" type="password" placeholder="Mật khẩu mới" autocomplete="new-password"><input id="ad-new2" type="password" placeholder="Nhập lại" autocomplete="new-password"></div>
+      <button type="button" id="ad-chpw" style="margin-top:8px">Đổi mật khẩu</button>
+    </fieldset>
+    <p id="ad-msg" class="hint" role="status"></p>
+    <p class="hint">Đây là khoá mềm chạy trên trình duyệt: chặn được người dùng thường nhưng không chặn được người biết đọc mã nguồn. Muốn chặn chắc chắn cần máy chủ kiểm tra thanh toán.</p>
+    <button type="button" id="ad-logout">Đăng xuất và khoá lại</button>
+  </div>
+  <div id="vip-on" class="vip-view" hidden>
+    <p id="vip-on-msg">Bài tập mẫu đã được mở trên máy này.</p>
+    <button type="button" id="vip-lock">Khoá lại trên máy này</button>
+  </div>
+</dialog>
 <div id="pr"></div>
 <footer class="app-footer">CSDL Studio · Lab04 Đại số quan hệ · Lab05 Phụ thuộc hàm · Ctrl+Alt+1 / Ctrl+Alt+2 chuyển công cụ</footer>
 </div>
 <script src="js/ra/editor.js"></script>
 <script src="js/ra/tools.js"></script>
+<script src="js/ra/engine.js"></script>
+<script src="js/ra/data.js"></script>
+<script src="js/ra/ui.js"></script>
 <script src="js/fd/editor.js"></script>
 <script src="js/fd/algorithms.js"></script>
 <script src="js/fd/reports.js"></script>
 <script src="js/fd/data.js"></script>
 <script src="js/fd/ui.js"></script>
+<script src="js/core/config.js"></script>
 <script src="js/core/app.js"></script>
+<script src="js/core/vip.js"></script>
 </body>
 </html>
